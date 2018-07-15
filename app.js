@@ -28,7 +28,8 @@ app.get("/", (req, res) => {
       ${posts.map(post => `
         <div class='news-item'>
           <p>
-            <span class="news-position">${post.id}. ▲</span>${post.title}
+            <span class="news-position">${post.id}. ▲</span>
+            <a href="/posts/${post.id}">${post.title}</a>
             <small>(by ${post.name})</small>
           </p>
           <small class="news-info">
@@ -44,7 +45,7 @@ app.get("/", (req, res) => {
 });
 
 
-app.get('/posts/:id', (req, res) => {
+app.get('/posts/:id', (req, res, next) => {
   const id = req.params.id;
   const post = postBank.find(id);
 
@@ -61,7 +62,7 @@ app.get('/posts/:id', (req, res) => {
           <p>
             <span class="news-position">${post.id}. ▲</span>${post.title}
             <small>(by ${post.name})</small>
-            <hr>
+                        <hr>
             ${post.content}
           </p>
           <small class="news-info">
